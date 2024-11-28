@@ -49,7 +49,7 @@
         <RadioButton fx:id="radioButtonNVIDIA" text="NVIDIA" />
         <RadioButton fx:id="radioButtonVIA" text="VIA" />
         <CheckBox fx:id="checkBox" text="Raktáron van" />
-        <Button text="Szűrés" onAction="#btSearch" />
+        <Button fx:id="searchButton" text="Szűrés" onAction="#btSearch" />
 
     </VBox>
     <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
@@ -74,7 +74,15 @@
         <Button text="Módosít" onAction="#Update" />
     </VBox>
 
+    <VBox fx:id="deleteNotebook">
+        <Label fx:id="deleteLabel">Kérjük válassza ki melyik Notebookot szeretné törölni</Label>
+        <ComboBox fx:id="comboNotebook">
+            <items>
 
+            </items>
+        </ComboBox>
+        <Button text="Törlés" onAction="#Delete" />
+    </VBox>
     <!--Adatkiíráshoz használt táblázatok-->
 
     <!--Notebook modelhez-->

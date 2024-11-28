@@ -28,16 +28,19 @@ public class NotebookController {
     @FXML private VBox read_two;
     @FXML private VBox createOS;
     @FXML private VBox updateOS;
+    @FXML private VBox deleteNotebook;
     @FXML private TextField searchField;
     @FXML private TextField newOS;
     @FXML private TextField modifiedOS;
     @FXML private ComboBox comboGyartok;
     @FXML private ComboBox comboOS;
+    @FXML private ComboBox comboNotebook;
     @FXML private RadioButton radioButtonINTEL;
     @FXML private RadioButton radioButtonATi;
     @FXML private RadioButton radioButtonNVIDIA;
     @FXML private RadioButton radioButtonVIA;
     @FXML private CheckBox checkBox;
+    @FXML private Button searchButton;
 
 
 
@@ -92,6 +95,7 @@ public class NotebookController {
         tv1.setVisible(false);
         tv1.setManaged(false);
 
+
         tv2.setVisible(false);
         tv2.setManaged(false);
         gp2.setVisible(false);
@@ -131,6 +135,14 @@ public class NotebookController {
         updateOS.setManaged(false);
         comboOS.setVisible(false);
         comboOS.setManaged(false);
+
+
+        //Delete
+
+        deleteNotebook.setVisible(false);
+        deleteNotebook.setManaged(false);
+        comboNotebook.setVisible(false);
+        comboNotebook.setManaged(false);
     }
 
     @FXML
@@ -181,7 +193,7 @@ public class NotebookController {
         ElemekElrejtése();
         lb1.setVisible(true);
         lb1.setManaged(true);
-        lb1.setText("Az adatbázisban található összes notebook. Összesen: "+session.createQuery("FROM Notebook", Notebook.class).stream().count()+" db");
+        lb1.setText("Az adatbázisban található összes notebook. Összesen: "+session.createQuery("FROM Notebook", Notebook.class).stream().count()+" db.");
 
         setNotebookTable();
 
@@ -232,7 +244,7 @@ public class NotebookController {
         tv1.getItems().clear();
     }
     @FXML
-    public void menuSearchReadClick() {
+    public void menuSearchReadClick(ActionEvent actionEvent) {
 
         ElemekElrejtése();
 
@@ -257,7 +269,7 @@ public class NotebookController {
 
 
 
-        radioButtonINTEL.setSelected(true);
+        radioButtonINTEL.setSelected(false);
         radioButtonATi.setSelected(false);
         radioButtonNVIDIA.setSelected(false);
         radioButtonVIA.setSelected(false);
@@ -291,6 +303,8 @@ public class NotebookController {
             }
         });
 
+
+
         List<String> gyartoLista=new ArrayList<>();
         gyartoLista.add("Válasszon egy gyártót");
         List<String>getGyartoLista = session.createQuery("SELECT DISTINCT n.Gyarto FROM Notebook n", String.class).list();
@@ -300,7 +314,7 @@ public class NotebookController {
         comboGyartok.setItems(FXCollections.observableArrayList(gyartoLista));
 
         comboGyartok.getSelectionModel().selectFirst();
-
+        btSearch(actionEvent);
     }
     @FXML
     public void btSearch(ActionEvent actionEvent) {
@@ -315,6 +329,9 @@ public class NotebookController {
         String getGyarto= comboGyartok.getSelectionModel().getSelectedItem().toString();
         int getGyartoIndex=comboGyartok.getSelectionModel().getSelectedIndex();
         String hql = "FROM Notebook WHERE 1=1";
+
+
+        //Megnézzük melyik van kiválaszta, az true értékkel tér vissza
         List<Boolean>radios=new ArrayList<>();
         radios.add(radioButtonINTEL.isSelected());
         radios.add(radioButtonATi.isSelected());
@@ -340,9 +357,13 @@ public class NotebookController {
         if(comboGyartok.getSelectionModel().getSelectedIndex()!=0){
             hql += " AND gyarto = :getGyarto";
         }
+        if(checkBox.isSelected()){
+            hql += " AND db>0";
+        }
 
-       setNotebookTable();
-
+        setNotebookTable();
+        lb1.setVisible(true);
+        lb1.setManaged(true);
         // Adatok lekérése a Hibernate segítségével
         Transaction transaction = session.beginTransaction();
         var query = session.createQuery(hql,Notebook.class);
@@ -358,12 +379,15 @@ public class NotebookController {
             tv1.getItems().add(notebook);
 
         }
+        tv1.refresh();
+        lb1.setText("Az adatbázisban található szűrt notebookok. Összesen: "+ (long) tv1.getItems().size() +" db.");
+
         transaction.commit();
 
 
     }
 
-
+    @FXML
     public void menuUpdateClick(ActionEvent actionEvent) {
        //Operációs rendszer nevének módosítása
         ElemekElrejtése();
@@ -372,6 +396,11 @@ public class NotebookController {
         tv2.setManaged(true);
         tv2.getItems().clear();
         tv2.getColumns().clear();
+
+        lb2.setVisible(true);
+        lb2.setManaged(true);
+
+
 
         updateOS.setVisible(true);
         updateOS.setManaged(true);
@@ -389,9 +418,11 @@ public class NotebookController {
         for(OS os : getOsLista) {
             osLista.add(os.getId()+". "+os.getNev());
             tv2.getItems().add(os);
-            System.out.println(os.getId()+". "+os.getNev());
         }
         comboOS.setItems(FXCollections.observableArrayList(osLista));
+
+
+        lb2.setText("Az adatbázisban található operációs rendszerek. Összesen: "+(long) tv2.getItems().size()+" db.");
 
         //comboOS.getSelectionModel().selectFirst();
 
@@ -425,10 +456,50 @@ public class NotebookController {
             transaction.commit();
         }
     }
+
     public void menuDeleteClick(ActionEvent actionEvent) {
-        // Notebook törlése (később implementálandó)
+        // Notebook törlése
+        ElemekElrejtése();
+        tv1.getItems().clear();
+        tv1.getColumns().clear();
+        lb1.setText("");
+
+        lb1.setVisible(true);
+        lb1.setManaged(true);
+         deleteNotebook.setVisible(true);
+        deleteNotebook.setManaged(true);
+        comboNotebook.setVisible(true);
+        comboNotebook.setManaged(true);
+
+        setNotebookTable();
+
+        List<String> notebookLista=new ArrayList<>();
+        List<Notebook>getOsLista = session.createQuery("FROM Notebook", Notebook.class).list();
+        for(Notebook nb : getOsLista) {
+            notebookLista.add(nb.getId()+". "+nb.getGyarto()+" "+nb.getTipus());
+            tv1.getItems().add(nb);
+        }
+        comboNotebook.setItems(FXCollections.observableArrayList(notebookLista));
+        lb1.setText("Az adatbázisban található összes notebook. Összesen: "+(long) tv1.getItems().size()+" db.");
+
     }
 
 
+    public void Delete(ActionEvent actionEvent) {
 
+        if(!comboNotebook.getSelectionModel().isEmpty()){
+            Transaction transaction = session.beginTransaction();
+            String selectedNotebook=comboNotebook.getSelectionModel().getSelectedItem().toString();
+            int dotIndex = selectedNotebook.indexOf('.');
+            int selectedNotebookIndex = Integer.parseInt(selectedNotebook.substring(0, dotIndex).trim());
+
+            Notebook nb=session.get(Notebook.class, selectedNotebookIndex);
+            session.delete(nb);
+
+            comboNotebook.getSelectionModel().clearSelection();
+            transaction.commit();
+
+            menuDeleteClick(actionEvent);
+        }
+    }
 }
