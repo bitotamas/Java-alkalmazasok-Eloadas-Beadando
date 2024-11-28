@@ -1,10 +1,10 @@
 package grafikus.notebook;
 
 
-import grafikus.notebook.Models.OS;
 import grafikus.notebook.Models.Notebook;
-import grafikus.notebook.Models.CPU;
 
+
+import grafikus.notebook.Models.OS;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,13 +26,16 @@ import java.util.List;
 public class NotebookController {
 
     @FXML private VBox read_two;
+    @FXML private VBox createOS;
     @FXML private TextField searchField;
+    @FXML private TextField newOS;
     @FXML private ComboBox comboGyartok;
     @FXML private RadioButton radioButtonINTEL;
     @FXML private RadioButton radioButtonATi;
     @FXML private RadioButton radioButtonNVIDIA;
     @FXML private RadioButton radioButtonVIA;
     @FXML private CheckBox checkBox;
+
 
 
 
@@ -50,6 +53,13 @@ public class NotebookController {
     @FXML private TableColumn<Notebook, Integer> processzorCol;
     @FXML private TableColumn<Notebook, Integer> oprendszerCol;
     @FXML private TableColumn<Notebook, Integer> dbCol;
+
+
+    @FXML private Label lb2;
+    @FXML private GridPane gp2;
+    @FXML private TableView<OS> tv2;
+    @FXML private TableColumn<OS, Integer> idCol;
+    @FXML private TableColumn<OS, String> nevCol;
 
     SessionFactory factory;
     private static Session session;
@@ -77,7 +87,15 @@ public class NotebookController {
         tv1.setVisible(false);
         tv1.setManaged(false);
 
-        //Beviteli mező
+        tv2.setVisible(false);
+        tv2.setManaged(false);
+        gp2.setVisible(false);
+        gp2.setManaged(false);
+        lb2.setVisible(false);
+        lb2.setManaged(false);
+
+
+        //Keresési mező
         read_two.setVisible(false);
         read_two.setManaged(false);
         searchField.setVisible(false);
@@ -95,10 +113,54 @@ public class NotebookController {
         checkBox.setVisible(false);
         checkBox.setManaged(false);
 
+        //Create beviteli mezők
+        createOS.setVisible(false);
+        createOS.setManaged(false);
+        newOS.setVisible(false);
+        newOS.setManaged(false);
+
     }
 
     @FXML
     public void menuCreateClick(ActionEvent actionEvent) {
+        ElemekElrejtése();
+
+        tv2.setVisible(true);
+        tv2.setManaged(true);
+
+        idCol = new TableColumn<>("Id");
+        nevCol = new TableColumn<>("Név");
+        idCol.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        nevCol.setCellValueFactory(new PropertyValueFactory<>("Nev"));
+        tv2.getColumns().addAll(idCol,nevCol);
+
+
+        createOS.setVisible(true);
+        createOS.setManaged(true);
+        newOS.setVisible(true);
+        newOS.setManaged(true);
+        List<OS> osLista = session.createQuery("FROM OS", OS.class).list();
+        tv2.getItems().addAll(osLista);
+
+    }
+    public void Create(ActionEvent actionEvent) {
+
+        Session session = factory.openSession();
+
+
+        System.out.println(newOS.getText());
+        OS osCreate=new OS(newOS.getText());
+        session.save(osCreate);
+
+
+        // Adatok lekérése a Hibernate segítségével
+        tv2.getItems().clear();
+        List<OS> osLista = session.createQuery("FROM OS", OS.class).list();
+        for (OS os : osLista) {
+            tv2.getItems().addAll(os);
+        }
+
+
 
 
     }

@@ -46,16 +46,28 @@
         <RadioButton fx:id="radioButtonATi" text="ATi" />
         <RadioButton fx:id="radioButtonNVIDIA" text="NVIDIA" />
         <RadioButton fx:id="radioButtonVIA" text="VIA" />
-
-
-
         <CheckBox fx:id="checkBox" text="Raktáron van" />
-
         <Button text="Szűrés" onAction="#btSearch" />
+
     </VBox>
+
+    <VBox fx:id="createOS">
+        <Label fx:id="createLabel">Írja be az új operációs rendszer nevét!</Label>
+        <TextField fx:id="newOS">...</TextField>
+        <Button text="Hozzáadás" onAction="#Create" />
+
+    </VBox>
+
+
     <Label fx:id="lb1">Táblázat</Label>
     <GridPane fx:id="gp1" hgap="2" vgap="4">
     </GridPane>
     <TableView fx:id="tv1">
+    </TableView>
+
+    <Label fx:id="lb2">Táblázat</Label>
+    <GridPane fx:id="gp2" hgap="2" vgap="4">
+    </GridPane>
+    <TableView fx:id="tv2">
     </TableView>
 </VBox>
