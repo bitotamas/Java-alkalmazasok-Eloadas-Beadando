@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.6" fx:controller="grafikus.notebook.ThreadsController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grafikus.notebook.ThreadsController">
    <children>
       <BorderPane layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -25,44 +25,44 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="startButton" layoutX="186.0" layoutY="355.0" mnemonicParsing="false" onAction="#onStartButtonClick" prefHeight="25.0" prefWidth="147.0" text="Start" />
-                  <Label alignment="CENTER" layoutX="325.0" layoutY="263.0" prefHeight="25.0" prefWidth="50.0" text="0" textAlignment="CENTER">
+                  <Button fx:id="startButton" layoutX="486.0" layoutY="356.0" mnemonicParsing="false" onAction="#onStartButtonClick" prefHeight="25.0" prefWidth="147.0" text="Start" />
+                  <Label fx:id="thread_one_txt" alignment="CENTER" layoutX="520.0" layoutY="264.0" prefHeight="25.0" prefWidth="80.0" text="0" textAlignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="thread_two_txt" layoutX="482.0" layoutY="246.0" prefHeight="17.0" prefWidth="113.0" />
-                  <Button fx:id="startButton1" layoutX="368.0" layoutY="355.0" mnemonicParsing="false" onAction="#onStartButtonClick" prefHeight="25.0" prefWidth="147.0" text="Stop" />
-                  <Label layoutX="241.0" layoutY="210.0" text="Szál1">
+                  <Button fx:id="stopButton" layoutX="668.0" layoutY="356.0" mnemonicParsing="false" onAction="#onStopButtonClick" prefHeight="25.0" prefWidth="147.0" text="Stop" />
+                  <Label layoutX="541.0" layoutY="211.0" text="Szál1">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="332.0" layoutY="210.0" text="Szál2">
+                  <Label layoutX="632.0" layoutY="211.0" text="Szál2">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="425.0" layoutY="210.0" text="Szál3">
+                  <Label layoutX="725.0" layoutY="211.0" text="Szál3">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="419.0" layoutY="263.0" prefHeight="25.0" prefWidth="50.0" text="0">
+                  <Label fx:id="thread_two_txt" alignment="CENTER" layoutX="611.0" layoutY="264.0" prefHeight="25.0" prefWidth="80.0" text="0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="235.0" layoutY="263.0" prefHeight="25.0" prefWidth="50.0" text="0">
+                  <Label fx:id="thread_three_txt" alignment="CENTER" layoutX="704.0" layoutY="264.0" prefHeight="25.0" prefWidth="80.0" text="0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="212.0" layoutY="93.0" text="Low budget stopper">
+                  <Label layoutX="512.0" layoutY="94.0" text="Low budget stopper">
                      <font>
                         <Font name="System Bold" size="29.0" />
                      </font>
                   </Label>
+                  <Label fx:id="resetLabel" alignment="CENTER" layoutX="589.0" layoutY="316.0" prefHeight="17.0" prefWidth="125.0" />
                </children>
             </AnchorPane>
          </center>
