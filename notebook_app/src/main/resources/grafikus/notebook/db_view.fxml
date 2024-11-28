@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grafikus.notebook.DBController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grafikus.notebook.DBController">
     <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <center>
@@ -33,7 +33,7 @@
                                                 </TableView>
                                             </center>
                                             <top>
-                                                <HBox prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #434343;" BorderPane.alignment="CENTER">
+                                                <HBox prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #4057e9;" BorderPane.alignment="CENTER">
                                                     <children>
                                                         <Label fx:id="ja" contentDisplay="TOP" prefHeight="123.0" prefWidth="1300" text="Notebookok" textFill="WHITE">
                                                             <padding>
@@ -61,7 +61,7 @@
                                         <BorderPane layoutX="66.0" layoutY="23.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <center>
 
-                                                <VBox fx:id="read_two" prefHeight="123.0" prefWidth="1300.0" spacing="10.0">
+                                                <VBox fx:id="Read2" prefHeight="123.0" prefWidth="1300.0" spacing="10.0">
                                                     <HBox>
                                                                 <TextField fx:id="searchField" prefWidth="500.0" promptText="Keresés..." />
                                                                 <ComboBox fx:id="comboGyartok" prefHeight="25.0" prefWidth="218.0" HBox.hgrow="ALWAYS">
@@ -107,7 +107,7 @@
                                                 </VBox>
                                             </center>
                                             <top>
-                                                <HBox prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #434343;" BorderPane.alignment="CENTER">
+                                                <HBox prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #4057e9;" BorderPane.alignment="CENTER">
                                                     <children>
                                                         <Label contentDisplay="TOP" prefHeight="123.0" prefWidth="500.0" text="Szűrt Notebookok" textFill="WHITE">
                                                             <padding>
@@ -161,7 +161,7 @@
                                                 </VBox>
                                             </center>
                                             <top>
-                                                <HBox prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #434343;" BorderPane.alignment="CENTER">
+                                                <HBox prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #4057e9;" BorderPane.alignment="CENTER">
                                                     <children>
                                                         <Label contentDisplay="TOP" prefHeight="123.0" prefWidth="500.0" text="Operációs rendszerek listája" textFill="WHITE">
                                                             <padding>
@@ -190,7 +190,7 @@
                                         <BorderPane layoutX="66.0" layoutY="23.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <center>
 
-                                                <VBox fx:id="udpateOS" prefHeight="123.0" prefWidth="1300.0" spacing="10.0">
+                                                <VBox fx:id="updateOS" prefHeight="123.0" prefWidth="1300.0" spacing="10.0">
                                                     <HBox>
                                                         <Label fx:id="updateLabel" contentDisplay="CENTER" prefHeight="17.0" prefWidth="391.0" text="Kérjük válassza ki melyik Operációs rendszert szeretné módosítani!" textAlignment="CENTER">
                                              <HBox.margin>
@@ -224,7 +224,7 @@
                                                 </VBox>
                                             </center>
                                             <top>
-                                                <HBox prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #434343;" BorderPane.alignment="CENTER">
+                                                <HBox prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #4057e9;" BorderPane.alignment="CENTER">
                                                     <children>
                                                         <Label contentDisplay="TOP" prefHeight="123.0" prefWidth="500.0" text="Operációs rendszerek listája" textFill="WHITE">
                                                             <padding>
@@ -255,13 +255,13 @@
 
                                                 <VBox fx:id="deleteNotebook" prefHeight="123.0" prefWidth="1300.0" spacing="10.0">
                                                     <HBox />
-                                                    <HBox prefHeight="46.0" prefWidth="1300.0">
+                                                    <HBox prefHeight="30.0" prefWidth="1300.0">
                                                         <Label fx:id="deleteLabel" contentDisplay="CENTER" prefHeight="17.0" prefWidth="290.0" text="Válassza ki a törölni kívánt Operációs rendszert!" textAlignment="CENTER">
                                                             <HBox.margin>
-                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                <Insets left="10.0" right="10.0" />
                                                             </HBox.margin></Label>
                                                     </HBox>
-                                       <HBox prefHeight="149.0" prefWidth="1300.0">
+                                       <HBox prefHeight="20.0" prefWidth="1300.0">
                                           <children>
                                              <ComboBox fx:id="comboNotebook" prefHeight="25.0" prefWidth="265.0">
                                                 <HBox.margin>
@@ -285,7 +285,7 @@
                                                 </VBox>
                                             </center>
                                             <top>
-                                                <HBox prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #434343;" BorderPane.alignment="CENTER">
+                                                <HBox prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #4057e9;" BorderPane.alignment="CENTER">
                                                     <children>
                                                         <Label contentDisplay="TOP" prefHeight="123.0" prefWidth="500.0" text="Operációs rendszerek listája" textFill="WHITE">
                                                             <padding>
@@ -311,8 +311,8 @@
                 </TabPane>
             </center>
         <top>
-            <HBox prefHeight="25.0" prefWidth="1300.0" style="-fx-background-color: #434343;" BorderPane.alignment="CENTER">
-                <Label contentDisplay="CENTER" prefHeight="25.0" prefWidth="1307.0" text="Adatbázis MENÜ" textAlignment="CENTER" textFill="WHITE" />
+            <HBox prefHeight="25.0" prefWidth="1300.0" style="-fx-background-color: #4057e9;" BorderPane.alignment="CENTER">
+                <Label contentDisplay="CENTER" prefHeight="25.0" prefWidth="1307.0" text="Adatbázis menü" textAlignment="CENTER" textFill="WHITE" />
             </HBox>
         </top>
         </BorderPane>

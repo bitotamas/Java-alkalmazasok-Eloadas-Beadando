@@ -8,19 +8,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grafikus.notebook.NotebookController">
+<AnchorPane prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grafikus.notebook.NotebookController">
     <children>
         <BorderPane prefHeight="506.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
-                <HBox prefHeight="60.0" prefWidth="421.0" style="-fx-background-color: #373737;" BorderPane.alignment="CENTER">
+                <HBox prefHeight="60.0" prefWidth="421.0" style="-fx-background-color: #4057e9;" BorderPane.alignment="CENTER">
                     <children>
-                        <Label prefHeight="60.0" prefWidth="922.0" text="JAVA FX Beadandó" textFill="WHITE">
+                        <Label contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="750.0" text="JAVA FX Beadandó" textAlignment="CENTER" textFill="WHITE">
                             <padding>
-                                <Insets left="20.0" />
+                                <Insets left="275.0" />
                             </padding>
                             <font>
                                 <Font size="22.0" />
                             </font>
+                     <HBox.margin>
+                        <Insets left="275.0" />
+                     </HBox.margin>
                         </Label>
                     </children>
                 </HBox>
@@ -28,10 +31,26 @@
             <center>
                 <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1300.0" spacing="20.0" BorderPane.alignment="TOP_CENTER">
                     <children>
-                        <Button fx:id="adatbazisButton" mnemonicParsing="false" onAction="#loadAdatbazis" prefHeight="40.0" prefWidth="212.0" text="Adatbázis" />
-                        <Button fx:id="soapClientButton" mnemonicParsing="false" onAction="#loadSoapClient" prefHeight="40.0" prefWidth="212.0" text="Soap Kliens" />
-                        <Button fx:id="parhuzamosButton" mnemonicParsing="false" onAction="#loadParhuzamos" prefHeight="40.0" prefWidth="212.0" text="Párhuzamos" />
-                        <Button fx:id="forexButton" mnemonicParsing="false" onAction="#loadForex" prefHeight="40.0" prefWidth="212.0" text="Forex" />
+                        <Button fx:id="databaseButton" mnemonicParsing="false" onAction="#loadDatabase" prefHeight="40.0" prefWidth="212.0"  text="Adatbázis" textFill="BLACK">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="soapClientButton" mnemonicParsing="false" onAction="#loadSoapClient" prefHeight="40.0" prefWidth="212.0"  text="Soap Kliens" textFill="BLACK">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="parhuzamosButton" mnemonicParsing="false" onAction="#loadParhuzamos" prefHeight="40.0" prefWidth="212.0"  text="Párhuzamos" textFill="BLACK">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="forexButton" mnemonicParsing="false" onAction="#loadForex" prefHeight="40.0" prefWidth="212.0"  text="Forex" textFill="BLACK">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
                     </children>
                <BorderPane.margin>
                   <Insets top="10.0" />
@@ -39,7 +58,7 @@
                 </HBox>
             </center>
             <bottom>
-                <AnchorPane fx:id="ContetntView" prefHeight="630.0" prefWidth="1300.0" BorderPane.alignment="CENTER" />
+                <AnchorPane fx:id="view" prefHeight="630.0" prefWidth="1300.0" BorderPane.alignment="CENTER" />
             </bottom>
         </BorderPane>
     </children>

@@ -31,38 +31,25 @@ import java.util.ResourceBundle;
 public class DBController implements Initializable {
 
 
-    @FXML public Label lb1;
-    @FXML public VBox read_two;
-    @FXML public TextField searchField;
+    @FXML public Label lb1,lb2,lb3,lb4,lb5, radioLabel, updateLabel, createLabel, deleteLabel;
+
+    @FXML public VBox Read2, updateOS, createOS, deleteNotebook;
+
+    @FXML public TextField searchField, modifiedOS, newOS;
+
     @FXML public ComboBox comboGyartok;
-    @FXML public Label radioLabel;
-    @FXML public RadioButton radioButtonINTEL;
-    @FXML public RadioButton radioButtonATi;
-    @FXML public RadioButton radioButtonNVIDIA;
-    @FXML public RadioButton radioButtonVIA;
+
+    @FXML public RadioButton radioButtonINTEL, radioButtonATi, radioButtonNVIDIA, radioButtonVIA;
+
     @FXML public CheckBox checkBox;
+
     @FXML public Button searchButton;
-    @FXML public Label lb2;
-    @FXML public VBox udpateOS;
-    @FXML public Label updateLabel;
-    @FXML public ComboBox comboOS;
-    @FXML public Label lb4;
-    @FXML public TextField modifiedOS;
-    @FXML public VBox createOS;
-    @FXML public Label createLabel;
-    @FXML public TextField newOS;
-    @FXML public Label lb3;
-    @FXML public VBox deleteNotebook;
-    @FXML public Label deleteLabel;
-    @FXML public ComboBox comboNotebook;
-    @FXML public Label lb5;
 
+    @FXML public ComboBox comboOS, comboNotebook;
 
-    @FXML AnchorPane readNotebook;
+    @FXML public AnchorPane readNotebook;
 
-    @FXML private TableView<Notebook> tv1;
-    @FXML private TableView<Notebook> tv2;
-    @FXML private TableView<Notebook> tv5;
+    @FXML private TableView<Notebook> tv1, tv2, tv5;
     @FXML private TableColumn<Notebook, Integer> IDCol;
     @FXML private TableColumn<Notebook, String> gyartoCol;
     @FXML private TableColumn<Notebook, String> tipusCol;
@@ -75,8 +62,7 @@ public class DBController implements Initializable {
     @FXML private TableColumn<Notebook, Integer> oprendszerCol;
     @FXML private TableColumn<Notebook, Integer> dbCol;
 
-    @FXML private TableView<OS> tv3;
-    @FXML public TableView<OS> tv4;
+    @FXML private TableView<OS> tv3,tv4;
     @FXML private TableColumn<OS, Integer> idCol;
     @FXML private TableColumn<OS, String> nevCol;
 
@@ -240,8 +226,8 @@ public class DBController implements Initializable {
     }
 
     public void menuSearcReadClick(Event event) {
-        read_two.setVisible(true);
-        read_two.setManaged(true);
+        Read2.setVisible(true);
+        Read2.setManaged(true);
 
         radioButtonINTEL.setSelected(false);
         radioButtonATi.setSelected(false);
