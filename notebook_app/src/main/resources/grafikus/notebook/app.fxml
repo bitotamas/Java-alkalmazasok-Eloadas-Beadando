@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.*?>
 <VBox spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="grafikus.notebook.NotebookController">
     <padding>
@@ -24,6 +20,9 @@
                     <MenuItem text="Read" onAction="#menuReadClick"/>
                 </items>
                 <items>
+                    <MenuItem text="SearchRead" onAction="#menuSearchReadClick"/>
+                </items>
+                <items>
                     <MenuItem text="Update" onAction="#menuUpdateClick"/>
                 </items>
                 <items>
@@ -32,7 +31,29 @@
             </Menu>
         </menus>
     </MenuBar>
-    <Label fx:id="lb1">a</Label>
+    <VBox fx:id="read_two">
+        <TextField fx:id="searchField" promptText="Keresés..." />
+
+        <ComboBox fx:id="comboGyartok">
+            <items>
+
+            </items>
+        </ComboBox>
+
+
+        <Label fx:id="radioLabel">Videóvezérlő gyártója</Label>
+        <RadioButton fx:id="radioButtonINTEL" text="Intel" />
+        <RadioButton fx:id="radioButtonATi" text="ATi" />
+        <RadioButton fx:id="radioButtonNVIDIA" text="NVIDIA" />
+        <RadioButton fx:id="radioButtonVIA" text="VIA" />
+
+
+
+        <CheckBox fx:id="checkBox" text="Raktáron van" />
+
+        <Button text="Szűrés" onAction="#btSearch" />
+    </VBox>
+    <Label fx:id="lb1">Táblázat</Label>
     <GridPane fx:id="gp1" hgap="2" vgap="4">
     </GridPane>
     <TableView fx:id="tv1">

@@ -32,19 +32,30 @@ public class Notebook {
     @Column(name = "ar")
     private Integer Ar;
 
-    @Column(name = "processzorid")
-    private Integer ProcesszorId;
-
-    @Column(name = "oprendszerid")
-    private Integer OprendszerId;
-
     @Column(name = "db")
     private Integer Db;
 
     public Notebook() {
     }
 
-    public Notebook(String gyarto, String tipus, float kijelzo, Integer memoria, Integer merevlemez, String videovezerlo, Integer ar, Integer processzorId, Integer oprendszerId, Integer db) {
+    @ManyToOne
+    @JoinColumn(name = "processzorid")
+    private CPU processzor;  // CPU objektum (tartalmazza a processzor nevét)
+
+    @ManyToOne
+    @JoinColumn(name = "oprendszerid")
+    private OS operaciosRendszer;  // OS objektum (tartalmazza az oprendszer nevét)
+
+
+    public String getProcesszorNev() {
+        return processzor != null ? processzor.getGyarto()+" "+processzor.getTipus() : "N/A";  // Ha létezik processzor, akkor annak nevét adja vissza
+    }
+
+    public String getOperaciosRendszerNev() {
+        return operaciosRendszer != null ? operaciosRendszer.getNev() : "N/A";  // Ha létezik oprendszer, akkor annak nevét adja vissza
+    }
+
+    public Notebook(String gyarto, String tipus, float kijelzo, Integer memoria, Integer merevlemez, String videovezerlo, Integer ar, Integer db, CPU processzor, OS operaciosRendszer) {
         Gyarto = gyarto;
         Tipus = tipus;
         Kijelzo = kijelzo;
@@ -52,10 +63,22 @@ public class Notebook {
         Merevlemez = merevlemez;
         Videovezerlo = videovezerlo;
         Ar = ar;
-        ProcesszorId = processzorId;
-        OprendszerId = oprendszerId;
         Db = db;
+        this.processzor = processzor;
+        this.operaciosRendszer = operaciosRendszer;
     }
+
+//   public Notebook(String gyarto, String tipus, float kijelzo, Integer memoria, Integer merevlemez, String videovezerlo, Integer ar, /*Integer processzorId, Integer oprendszerId,*/ Integer db) {
+ //       Gyarto = gyarto;
+  //      Tipus = tipus;
+  //      Kijelzo = kijelzo;
+  //      Memoria = memoria;
+//        Merevlemez = merevlemez;
+ //       Videovezerlo = videovezerlo;
+   //     Ar = ar;
+     //   Db = db;
+    //}
+
 
     public Integer getId() {
         return Id;
@@ -119,22 +142,6 @@ public class Notebook {
 
     public void setAr(Integer ar) {
         Ar = ar;
-    }
-
-    public Integer getProcesszorId() {
-        return ProcesszorId;
-    }
-
-    public void setProcesszorId(Integer processzorId) {
-        ProcesszorId = processzorId;
-    }
-
-    public Integer getOprendszerId() {
-        return OprendszerId;
-    }
-
-    public void setOprendszerId(Integer oprendszerId) {
-        OprendszerId = oprendszerId;
     }
 
     public Integer getDb() {
