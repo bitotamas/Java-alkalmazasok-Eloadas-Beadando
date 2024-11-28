@@ -14,7 +14,7 @@
             <top>
                 <HBox prefHeight="60.0" prefWidth="421.0" style="-fx-background-color: #4057e9;" BorderPane.alignment="CENTER">
                     <children>
-                        <Label contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="750.0" text="JAVA FX Beadandó" textAlignment="CENTER" textFill="WHITE">
+                        <Label contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="750.0" text="JavaFX beadandó" textAlignment="CENTER" textFill="WHITE">
                             <padding>
                                 <Insets left="275.0" />
                             </padding>
