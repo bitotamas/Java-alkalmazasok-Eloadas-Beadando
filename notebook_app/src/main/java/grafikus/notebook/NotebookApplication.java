@@ -18,7 +18,7 @@ public class NotebookApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("app.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1300, 750);
-        stage.setTitle("Hello!");
+        stage.setTitle("Notebook's");
         stage.setScene(scene);
         stage.show();
 

@@ -27,9 +27,12 @@ public class NotebookController {
 
     @FXML private VBox read_two;
     @FXML private VBox createOS;
+    @FXML private VBox updateOS;
     @FXML private TextField searchField;
     @FXML private TextField newOS;
+    @FXML private TextField modifiedOS;
     @FXML private ComboBox comboGyartok;
+    @FXML private ComboBox comboOS;
     @FXML private RadioButton radioButtonINTEL;
     @FXML private RadioButton radioButtonATi;
     @FXML private RadioButton radioButtonNVIDIA;
@@ -60,6 +63,8 @@ public class NotebookController {
     @FXML private TableView<OS> tv2;
     @FXML private TableColumn<OS, Integer> idCol;
     @FXML private TableColumn<OS, String> nevCol;
+
+
 
     SessionFactory factory;
     private static Session session;
@@ -119,6 +124,13 @@ public class NotebookController {
         newOS.setVisible(false);
         newOS.setManaged(false);
 
+
+        //Update
+
+        updateOS.setVisible(false);
+        updateOS.setManaged(false);
+        comboOS.setVisible(false);
+        comboOS.setManaged(false);
     }
 
     @FXML
@@ -127,6 +139,8 @@ public class NotebookController {
 
         tv2.setVisible(true);
         tv2.setManaged(true);
+        tv2.getColumns().clear();
+        tv2.getItems().clear();
 
         idCol = new TableColumn<>("Id");
         nevCol = new TableColumn<>("Név");
@@ -160,14 +174,15 @@ public class NotebookController {
             tv2.getItems().addAll(os);
         }
 
-
-
-
     }
 
     @FXML
     protected void menuReadClick() {
         ElemekElrejtése();
+        lb1.setVisible(true);
+        lb1.setManaged(true);
+        lb1.setText("Az adatbázisban található összes notebook. Összesen: "+session.createQuery("FROM Notebook", Notebook.class).stream().count()+" db");
+
         setNotebookTable();
 
         // Adatok lekérése a Hibernate segítségével
@@ -350,9 +365,66 @@ public class NotebookController {
 
 
     public void menuUpdateClick(ActionEvent actionEvent) {
-        // Notebook módosítása (később implementálandó)
+       //Operációs rendszer nevének módosítása
+        ElemekElrejtése();
+
+        tv2.setVisible(true);
+        tv2.setManaged(true);
+        tv2.getItems().clear();
+        tv2.getColumns().clear();
+
+        updateOS.setVisible(true);
+        updateOS.setManaged(true);
+        comboOS.setVisible(true);
+        comboOS.setManaged(true);
+
+        idCol = new TableColumn<>("Id");
+        nevCol = new TableColumn<>("Név");
+        idCol.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        nevCol.setCellValueFactory(new PropertyValueFactory<>("Nev"));
+        tv2.getColumns().addAll(idCol,nevCol);
+
+        List<String> osLista=new ArrayList<>();
+        List<OS>getOsLista = session.createQuery("FROM OS", OS.class).list();
+        for(OS os : getOsLista) {
+            osLista.add(os.getId()+". "+os.getNev());
+            tv2.getItems().add(os);
+            System.out.println(os.getId()+". "+os.getNev());
+        }
+        comboOS.setItems(FXCollections.observableArrayList(osLista));
+
+        //comboOS.getSelectionModel().selectFirst();
+
+    }
+    public void updateTextField(ActionEvent actionEvent) {
+
+        modifiedOS.setText("");
+        if(!comboOS.getSelectionModel().isEmpty()){
+            String selectedOS= comboOS.getSelectionModel().getSelectedItem().toString();
+            // Levágjuk az első pont előtti részt (beleértve a pontot és az utána lévő szóközt is)
+            modifiedOS.setText(selectedOS.substring(selectedOS.indexOf(".")+2));
+        }
+
     }
 
+    public void Update(ActionEvent actionEvent) {
+
+        if(!modifiedOS.getText().trim().isEmpty() || !modifiedOS.getText().trim().equals(comboOS.getSelectionModel().getSelectedItem().toString())){
+            Transaction transaction = session.beginTransaction();
+            String selectedOS=comboOS.getSelectionModel().getSelectedItem().toString();
+            int dotIndex = selectedOS.indexOf('.');
+            int selectedOsIndex = Integer.parseInt(selectedOS.substring(0, dotIndex).trim());
+
+            OS os=session.get(OS.class, selectedOsIndex);
+            os.setNev(modifiedOS.getText().trim());
+            session.update(os);
+            tv2.refresh();
+            comboOS.getSelectionModel().clearSelection();
+            modifiedOS.setText("");
+
+            transaction.commit();
+        }
+    }
     public void menuDeleteClick(ActionEvent actionEvent) {
         // Notebook törlése (később implementálandó)
     }

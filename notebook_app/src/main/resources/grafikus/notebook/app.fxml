@@ -31,6 +31,8 @@
             </Menu>
         </menus>
     </MenuBar>
+
+    <!--Filtered read-hez tartozó beviteli mezők-->
     <VBox fx:id="read_two">
         <TextField fx:id="searchField" promptText="Keresés..." />
 
@@ -50,24 +52,44 @@
         <Button text="Szűrés" onAction="#btSearch" />
 
     </VBox>
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
+    <!--Create-hez tartozó beviteli mezők-->
     <VBox fx:id="createOS">
         <Label fx:id="createLabel">Írja be az új operációs rendszer nevét!</Label>
         <TextField fx:id="newOS">...</TextField>
         <Button text="Hozzáadás" onAction="#Create" />
 
     </VBox>
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+
+    <VBox fx:id="updateOS">
+        <Label fx:id="updateLabel">Kérjük válassza ki melyik operációs rendszer nevét szeretné módosítani</Label>
+        <ComboBox fx:id="comboOS" onAction="#updateTextField">
+            <items>
+
+            </items>
+        </ComboBox>
+        <TextField fx:id="modifiedOS"></TextField>
+        <Button text="Módosít" onAction="#Update" />
+    </VBox>
 
 
-    <Label fx:id="lb1">Táblázat</Label>
+    <!--Adatkiíráshoz használt táblázatok-->
+
+    <!--Notebook modelhez-->
+    <Label fx:id="lb1">a</Label>
     <GridPane fx:id="gp1" hgap="2" vgap="4">
     </GridPane>
     <TableView fx:id="tv1">
     </TableView>
 
-    <Label fx:id="lb2">Táblázat</Label>
+    <!--OS modelhez-->
+    <Label fx:id="lb2">b</Label>
     <GridPane fx:id="gp2" hgap="2" vgap="4">
     </GridPane>
     <TableView fx:id="tv2">
     </TableView>
+
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 </VBox>
