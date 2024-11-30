@@ -5,6 +5,7 @@ module grafikus.notebook.notebook_app {
     requires org.hibernate.orm.core;
     requires java.naming;
     requires java.sql;
+    requires javafx.base;
 
     opens grafikus.notebook to javafx.fxml;
     opens grafikus.notebook.Models to javafx.base, org.hibernate.orm.core;

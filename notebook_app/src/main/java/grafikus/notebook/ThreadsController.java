@@ -8,11 +8,8 @@ import javafx.scene.control.Label;
 
 public class ThreadsController {
 
+    @FXML
     public Label resetLabel;
-    @FXML
-    private Button stopButton;
-    @FXML
-    private Button startButton;
     @FXML
     private Label thread_one_txt;
     @FXML
@@ -23,15 +20,15 @@ public class ThreadsController {
     public Button clearButton;
 
     private volatile boolean running = false;
-    private Szal1 szal1;
-    private Szal2 szal2;
-    private Szal3 szal3;
+    private Thread1 thread1;
+    private Thread2 thread2;
+    private Thread3 thread3;
 
     private int counter1 = 0;
     private int counter2 = 0;
     private int counter3 = 0;
 
-    class Szal1 extends Thread {
+    class Thread1 extends Thread {
         @Override
         public void run() {
             while (running) {
@@ -41,13 +38,13 @@ public class ThreadsController {
                 try {
                     Thread.sleep(60000);
                 } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt(); // Állítsuk a megszakítási flaget
-                    break; // Kilépés a ciklusból
+                    Thread.currentThread().interrupt();
+                    break;
                 }
             }
         }
     }
-    class Szal2 extends Thread {
+    class Thread2 extends Thread {
         @Override
         public void run() {
             while (running) {
@@ -57,13 +54,13 @@ public class ThreadsController {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt(); // Állítsuk a megszakítási flaget
-                    break; // Kilépés a ciklusból
+                    Thread.currentThread().interrupt();
+                    break;
                 }
             }
         }
     }
-    class Szal3 extends Thread {
+    class Thread3 extends Thread {
         @Override
         public void run() {
             while (running) {
@@ -73,8 +70,8 @@ public class ThreadsController {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt(); // Állítsuk a megszakítási flaget
-                    break; // Kilépés a ciklusból
+                    Thread.currentThread().interrupt();
+                    break;
                 }
             }
         }
@@ -85,22 +82,22 @@ public class ThreadsController {
     private void onStartButtonClick() {
         if (!running) {
             running = true;
-            szal1 = new Szal1();
-            szal2 = new Szal2();
-            szal3 = new Szal3();
+            thread1 = new Thread1();
+            thread2 = new Thread2();
+            thread3 = new Thread3();
 
-            szal1.start();
-            szal2.start();
-            szal3.start();
+            thread1.start();
+            thread2.start();
+            thread3.start();
         }
     }
 
     @FXML
     public void onStopButtonClick(ActionEvent actionEvent) {
         running = false;
-        if (szal1 != null) szal1.interrupt();
-        if (szal2 != null) szal2.interrupt();
-        if (szal3 != null) szal3.interrupt();
+        if (thread1 != null) thread1.interrupt();
+        if (thread2 != null) thread2.interrupt();
+        if (thread3 != null) thread3.interrupt();
         counter1 = 0;
         counter2 = 0;
         counter3 = 0;

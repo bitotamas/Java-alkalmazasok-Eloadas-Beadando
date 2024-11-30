@@ -11,31 +11,36 @@ import java.util.ResourceBundle;
 
 public class NotebookController implements Initializable {
 
-    @FXML private Button soapClientButton;
     @FXML private Button databaseButton;
     @FXML private Button parhuzamosButton;
+    @FXML private Button soapClientButton;
     @FXML private Button forexButton;
     @FXML private AnchorPane view;
 
     @FXML
+
+
+    //Adatbázis (Db_view) betöltése a Main_view view Pane elemébe
     public void loadDatabase(javafx.event.ActionEvent actionEvent) throws IOException {
         AnchorPane selectedView = FXMLLoader.load(getClass().getResource("Db_view.fxml"));
         view.getChildren().setAll(selectedView);
     }
+    //SOAP kliens (SOAP_view) betöltése a Main_view view Pane elemébe
     @FXML
     public void loadSoapClient(javafx.event.ActionEvent actionEvent) throws IOException {
-      /*  AnchorPane newView = FXMLLoader.load(getClass().getResource("SoapClient_main.fxml"));
-        view.getChildren().setAll(newView);*/
+        AnchorPane selectedView = FXMLLoader.load(getClass().getResource("SOAP_view.fxml"));
+        view.getChildren().setAll(selectedView);
     }
+    //A szálkezeléses nézet (Parhuzamos_view) betöltése a Main_view view Pane elemébe
     @FXML
     public void loadParhuzamos(javafx.event.ActionEvent actionEvent) throws IOException {
-        AnchorPane newView = FXMLLoader.load(getClass().getResource("Parhuzamos_view.fxml"));
-        view.getChildren().setAll(newView);
+        AnchorPane selectedView = FXMLLoader.load(getClass().getResource("Parhuzamos_view.fxml"));
+        view.getChildren().setAll(selectedView);
     }
+
     @FXML
     public void loadForex(javafx.event.ActionEvent actionEvent) throws IOException {
-       /* AnchorPane newView = FXMLLoader.load(getClass().getResource("Forex_main.fxml"));
-        view.getChildren().setAll(newView);*/
+
     }
 
     @Override

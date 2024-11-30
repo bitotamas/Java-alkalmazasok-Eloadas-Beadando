@@ -32,21 +32,13 @@ public class DBController implements Initializable {
 
 
     @FXML public Label lb1,lb2,lb3,lb4,lb5, radioLabel, updateLabel, createLabel, deleteLabel;
-
     @FXML public VBox Read2, updateOS, createOS, deleteNotebook;
-
     @FXML public TextField searchField, modifiedOS, newOS;
-
     @FXML public ComboBox comboGyartok;
-
     @FXML public RadioButton radioButtonINTEL, radioButtonATi, radioButtonNVIDIA, radioButtonVIA;
-
     @FXML public CheckBox checkBox;
-
     @FXML public Button searchButton;
-
     @FXML public ComboBox comboOS, comboNotebook;
-
     @FXML public AnchorPane readNotebook;
 
     @FXML private TableView<Notebook> tv1, tv2, tv5;
@@ -78,10 +70,7 @@ public class DBController implements Initializable {
             factory = metadata.getSessionFactoryBuilder().build();
             session = factory.openSession();
         }
-
         setNotebookTable(tv1);
-
-
     }
 
 
@@ -89,7 +78,6 @@ public class DBController implements Initializable {
     public void setNotebookTable(TableView<Notebook> tv) {
         tv.getColumns().clear();
         tv.getItems().clear();// Előző oszlopok törlése
-
         // Oszlopok létrehozása a Notebook osztály mezői alapján
         IDCol = new TableColumn<>("Id");
         gyartoCol = new TableColumn<>("Gyártó");
@@ -102,13 +90,10 @@ public class DBController implements Initializable {
         processzorCol = new TableColumn<>("Processzor");
         oprendszerCol = new TableColumn<>("Operációs rendszer");
         dbCol = new TableColumn<>("DB");
-
         // Oszlopok hozzáadása a táblázathoz
         tv.getColumns().addAll(IDCol, gyartoCol, tipusCol, kijelzoCol, memoriaCol, merevlemezCol, videovezerloCol, arCol, processzorCol, oprendszerCol, dbCol);
-
         processzorCol.setCellValueFactory(new PropertyValueFactory<>("processzorNev"));
         oprendszerCol.setCellValueFactory(new PropertyValueFactory<>("operaciosRendszerNev"));
-
         // Beállítjuk, hogy az oszlopokhoz melyik Notebook mezőt társítjuk
         IDCol.setCellValueFactory(new PropertyValueFactory<>("Id"));
         gyartoCol.setCellValueFactory(new PropertyValueFactory<>("Gyarto"));
@@ -119,17 +104,12 @@ public class DBController implements Initializable {
         videovezerloCol.setCellValueFactory(new PropertyValueFactory<>("Videovezerlo"));
         arCol.setCellValueFactory(new PropertyValueFactory<>("Ar"));
         dbCol.setCellValueFactory(new PropertyValueFactory<>("Db"));
-
-
         Transaction transaction = session.beginTransaction();
         List<Notebook> notebookLista = session.createQuery("FROM Notebook", Notebook.class).list();
         for (Notebook notebook : notebookLista) {
             tv.getItems().add(notebook);
-
         }
         transaction.commit();
-
-
     }
     public void setNotebook2Table(Query query) {
         tv2.getColumns().clear();
@@ -168,13 +148,6 @@ public class DBController implements Initializable {
 
 
         Transaction transaction = session.beginTransaction();
-
-
-        boolean inStock = checkBox.isSelected();
-        String getGyarto= comboGyartok.getSelectionModel().getSelectedItem().toString();
-        int getGyartoIndex=comboGyartok.getSelectionModel().getSelectedIndex();
-
-
         if(query==null) {
             query= session.createQuery("FROM Notebook", Notebook.class);
         }
@@ -201,7 +174,6 @@ public class DBController implements Initializable {
     }
     @FXML
     public void getComboOsList(){
-
         List<String> osLista=new ArrayList<>();
         List<OS>getOsLista = session.createQuery("FROM OS", OS.class).list();
         for(OS os : getOsLista) {
@@ -218,7 +190,7 @@ public class DBController implements Initializable {
             notebookLista.add(nb.getId()+". "+nb.getGyarto()+" "+nb.getTipus());
         }
         comboNotebook.setItems(FXCollections.observableArrayList(notebookLista));
-        lb5.setText("Az adatbázisban található összes notebook. Összesen: "+(long) tv1.getItems().size()+" db.");
+        lb5.setText("Az adatbázisban található összes notebook. Összesen: "+(long) tv5.getItems().size()+" db.");
     }
     @FXML
     public void menuReadClick(Event event) {
@@ -266,7 +238,8 @@ public class DBController implements Initializable {
 
         List<String> gyartoLista=new ArrayList<>();
         gyartoLista.add("Válasszon egy gyártót");
-        List<String>getGyartoLista = session.createQuery("SELECT DISTINCT n.Gyarto FROM Notebook n", String.class).list();
+        List<String>getGyartoLista = session.createQuery
+                ("SELECT DISTINCT n.Gyarto FROM Notebook n", String.class).list();
         for(var item : getGyartoLista) {
             gyartoLista.add(item.toString());
         }
@@ -298,7 +271,6 @@ public class DBController implements Initializable {
         radios.add(radioButtonATi.isSelected());
         radios.add(radioButtonNVIDIA.isSelected());
         radios.add(radioButtonVIA.isSelected());
-
         if(radios.get(0)){
             hql += "AND videovezerlo LIKE 'Intel%'";
         }
@@ -311,7 +283,6 @@ public class DBController implements Initializable {
         if(radios.get(3)){
             hql += "AND videovezerlo LIKE 'VIA%'";
         }
-
         if(!searchText.isEmpty()) {
             hql += " AND (gyarto LIKE :searchText OR tipus LIKE :searchText  OR videovezerlo LIKE :searchText)";
         }
@@ -321,9 +292,6 @@ public class DBController implements Initializable {
         if(checkBox.isSelected()){
             hql += " AND db>0";
         }
-
-
-
         // Adatok lekérése a Hibernate segítségével
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery(hql,Notebook.class);
@@ -357,8 +325,6 @@ public class DBController implements Initializable {
         }
         setOsTable(tv3);
 
-
-
         // Adatok lekérése a Hibernate segítségével
         tv3.getItems().clear();
         setOsTable(tv3);
@@ -367,7 +333,6 @@ public class DBController implements Initializable {
     }
     public void menuUpdateClick(Event event) {
         setOsTable(tv4);
-
         getComboOsList();
         lb4.setText("Összesen: "+(long) tv4.getItems().size()+" db.");
     }
@@ -375,15 +340,22 @@ public class DBController implements Initializable {
     public void updateTextField(ActionEvent actionEvent) {
         modifiedOS.setText("");
         if(!comboOS.getSelectionModel().isEmpty()){
-            String selectedOS= comboOS.getSelectionModel().getSelectedItem().toString();
-            // Levágjuk az első pont előtti részt (beleértve a pontot és az utána lévő szóközt is)
+            String selectedOS= comboOS.getSelectionModel()
+                    .getSelectedItem()
+                    .toString();
+            // Levágjuk az első pont előtti részt
+            // (beleértve a pontot és az utána lévő szóközt is)
             modifiedOS.setText(selectedOS.substring(selectedOS.indexOf(".")+2));
         }
     }
 
 
     public void Update(ActionEvent actionEvent) {
-        if(!modifiedOS.getText().trim().isEmpty() || !modifiedOS.getText().trim().equals(comboOS.getSelectionModel().getSelectedItem().toString())){
+        if(!modifiedOS.getText().trim().isEmpty() || !modifiedOS.getText()
+                .trim()
+                .equals(comboOS.getSelectionModel()
+                        .getSelectedItem()
+                        .toString())){
             Transaction transaction = session.beginTransaction();
             String selectedOS=comboOS.getSelectionModel().getSelectedItem().toString();
             int dotIndex = selectedOS.indexOf('.');
@@ -395,7 +367,6 @@ public class DBController implements Initializable {
             tv4.refresh();
             comboOS.getSelectionModel().clearSelection();
             getComboOsList();
-
 
             modifiedOS.setText("");
 
