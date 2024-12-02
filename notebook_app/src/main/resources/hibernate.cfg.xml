@@ -4,7 +4,8 @@
         "http://www.hibernate.org/dtd/hibernate-configuration">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:sqlite:../feladat.db</property>
+        <property name="connection.url">jdbc:sqlite:feladat.db</property>
+        <property name="hibernate.dialect">org.sqlite.hibernate.dialect.SQLiteDialect</property>
         <mapping class="grafikus.notebook.Models.OS"/>
         <mapping class="grafikus.notebook.Models.Notebook"/>
         <mapping class="grafikus.notebook.Models.CPU"/>

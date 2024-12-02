@@ -21,6 +21,7 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 import javax.persistence.Query;
 import java.net.URL;
@@ -30,6 +31,8 @@ import java.util.ResourceBundle;
 
 public class DBController implements Initializable {
 
+    static SessionFactory factory;
+    static Session session;
 
     @FXML public Label lb1,lb2,lb3,lb4,lb5, radioLabel, updateLabel, createLabel, deleteLabel;
     @FXML public VBox Read2, updateOS, createOS, deleteNotebook;
@@ -58,19 +61,22 @@ public class DBController implements Initializable {
     @FXML private TableColumn<OS, Integer> idCol;
     @FXML private TableColumn<OS, String> nevCol;
 
-    SessionFactory factory;
-    private static Session session;
 
 
-    @FXML
+
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (session == null || !session.isOpen()) {
-            StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-            Metadata metadata = new MetadataSources(registry).buildMetadata();
-            factory = metadata.getSessionFactoryBuilder().build();
-            session = factory.openSession();
+        try {
+            if (session == null || !session.isOpen()) {
+                Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+                factory = cfg.buildSessionFactory();
+                session = factory.openSession();
+            }
+            setNotebookTable(tv1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Hiba a Hibernate inicializáció során: " + e.getMessage());
         }
-        setNotebookTable(tv1);
     }
 
 
@@ -194,7 +200,10 @@ public class DBController implements Initializable {
     }
     @FXML
     public void menuReadClick(Event event) {
-        setNotebookTable(tv1);
+        if(session!=null){
+            setNotebookTable(tv1);
+        }
+
     }
 
     public void menuSearcReadClick(Event event) {
