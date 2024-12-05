@@ -48,7 +48,6 @@ public class ForexController implements Initializable {
     private TableColumn<ForexData, String> AccountNameColumn;
     @FXML
     private TableColumn<ForexData, String> AccountValueColumn;
-
     //Aktualis arak
     @FXML
     private ComboBox<String> InstrumentsComboBox;
@@ -60,7 +59,6 @@ public class ForexController implements Initializable {
     private TableColumn<ForexData, String> instrumentDataValueColumn;
     @FXML
     private Label InstrumentResponseLabel;
-
     //Historikus árak
     @FXML
     private ComboBox<String> HistoricInstrumentsComboBox;
@@ -72,12 +70,10 @@ public class ForexController implements Initializable {
     private DatePicker CloseDatePicker;
     @FXML
     private Label HistoricResponseLabel;
-
     @FXML
     private LineChart ForexLineChart;
     @FXML
     private NumberAxis ForexYAxis;
-
     //Pocicio Nyitas
     @FXML
     private ComboBox<String> OpenPositionInstrumentsComboBox;
@@ -93,7 +89,6 @@ public class ForexController implements Initializable {
     private Label OpenPositionDirrectionErrorLabel;
     @FXML
     private Label OpenPositionResponseLabel;
-
     //Pozicio zaras
     @FXML
     private TextField ClosePostionIdTextField;
@@ -101,7 +96,6 @@ public class ForexController implements Initializable {
     private  Label ClosePostionIdErrorLabel;
     @FXML
     private Label ClosePostionResponseLabel;
-
     //Nyitott Poziciok
     @FXML
     private TableView<Trade> TradesTableView;
@@ -310,7 +304,7 @@ public class ForexController implements Initializable {
         try {
             String tradeId = ClosePostionIdTextField.getText();
             ctx.trade.close(new TradeCloseRequest(accountId, new TradeSpecifier(tradeId)));
-            ClosePostionResponseLabel.setText("Zárva sikeresen végrehajtva, " +"tradeId: "+tradeId);
+            ClosePostionResponseLabel.setText("A pozíció zárása sikeresen végrehajtva, " +"tradeId: "+tradeId);
         } catch (Exception e) {
             ClosePostionResponseLabel.setText("A zárást nem sikerül végrehajtani!");
         }

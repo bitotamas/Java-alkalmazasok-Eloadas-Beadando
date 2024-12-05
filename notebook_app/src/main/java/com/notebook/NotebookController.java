@@ -25,24 +25,22 @@ public class NotebookController implements Initializable {
         AnchorPane selectedView = FXMLLoader.load(getClass().getResource("Db_view.fxml"));
         view.getChildren().setAll(selectedView);
     }
-    //SOAP kliens (SOAP_view) betöltése a Main_view view Pane elemébe
-    @FXML
-    public void loadSoapClient(javafx.event.ActionEvent actionEvent) throws IOException {
-
-    }
     //A szálkezeléses nézet (Parhuzamos_view) betöltése a Main_view view Pane elemébe
     @FXML
     public void loadParhuzamos(javafx.event.ActionEvent actionEvent) throws IOException {
         AnchorPane selectedView = FXMLLoader.load(getClass().getResource("Parhuzamos_view.fxml"));
         view.getChildren().setAll(selectedView);
     }
-
+    //A FOREX kliens (Forex_view) betöltése a Main_view view Pane elemébe
     @FXML
     public void loadForex(javafx.event.ActionEvent actionEvent) throws IOException {
         AnchorPane selectedView = FXMLLoader.load(getClass().getResource("Forex_view.fxml"));
         view.getChildren().setAll(selectedView);
     }
+    @FXML
+    public void loadSoapClient(javafx.event.ActionEvent actionEvent) throws IOException {
 
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
